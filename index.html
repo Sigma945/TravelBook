@@ -1,119 +1,148 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-Hant">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jerry 的旅遊手冊</title>
-<style>
-  :root {
-    --bg: #f5f1ea;
-    --card: #ffffff;
-    --ink: #2c2a26;
-    --muted: #7a736a;
-    --accent: #c97b4a;
-    --shadow: 0 4px 20px rgba(0,0,0,.06);
-    --shadow-hover: 0 10px 30px rgba(0,0,0,.12);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    min-height: 100vh;
-    padding: 40px 20px 60px;
-    line-height: 1.6;
-  }
-  header {
-    max-width: 960px;
-    margin: 0 auto 40px;
-    text-align: center;
-  }
-  h1 {
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-  }
-  .subtitle { color: var(--muted); font-size: 1rem; }
-  main {
-    max-width: 960px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
-  }
-  .card {
-    background: var(--card);
-    border-radius: 14px;
-    padding: 28px 24px;
-    box-shadow: var(--shadow);
-    text-decoration: none;
-    color: inherit;
-    transition: transform .2s ease, box-shadow .2s ease;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-hover);
-  }
-  .flag { font-size: 2.6rem; line-height: 1; }
-  .name { font-size: 1.3rem; font-weight: 600; }
-  .date { font-size: .9rem; color: var(--accent); font-weight: 500; }
-  .desc { font-size: .92rem; color: var(--muted); }
-  .empty, .error {
-    grid-column: 1 / -1;
-    text-align: center;
-    color: var(--muted);
-    padding: 40px;
-    background: var(--card);
-    border-radius: 14px;
-    box-shadow: var(--shadow);
-  }
-  footer {
-    max-width: 960px;
-    margin: 50px auto 0;
-    text-align: center;
-    color: var(--muted);
-    font-size: .85rem;
-  }
-</style>
-</head>
-<body>
-  <header>
-    <h1>✈️ Jerry 的旅遊手冊</h1>
-    <p class="subtitle">選擇一個目的地，展開行程</p>
-  </header>
-  <main id="grid">
-    <div class="empty">載入中…</div>
-  </main>
-  <footer>每段旅程，都值得被好好記錄。</footer>
-
-<script>
-  fetch('countries.json?v=' + Date.now())
-    .then(r => {
-      if (!r.ok) throw new Error('無法載入 countries.json');
-      return r.json();
-    })
-    .then(list => {
-      const grid = document.getElementById('grid');
-      if (!list.length) {
-        grid.innerHTML = '<div class="empty">尚未有行程，敬請期待。</div>';
-        return;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>各國旅遊手冊</title>
+    <style>
+      :root {
+        --bg: #f5f1ea;
+        --card: #ffffff;
+        --ink: #2c2a26;
+        --muted: #7a736a;
+        --accent: #c97b4a;
+        --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.12);
       }
-      grid.innerHTML = list.map(c => `
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei",
+          sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        min-height: 100vh;
+        padding: 40px 20px 60px;
+        line-height: 1.6;
+      }
+      header {
+        max-width: 960px;
+        margin: 0 auto 40px;
+        text-align: center;
+      }
+      h1 {
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+      }
+      .subtitle {
+        color: var(--muted);
+        font-size: 1rem;
+      }
+      main {
+        max-width: 960px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 20px;
+      }
+      .card {
+        background: var(--card);
+        border-radius: 14px;
+        padding: 28px 24px;
+        box-shadow: var(--shadow);
+        text-decoration: none;
+        color: inherit;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-hover);
+      }
+      .flag {
+        font-size: 2.6rem;
+        line-height: 1;
+      }
+      .name {
+        font-size: 1.3rem;
+        font-weight: 600;
+      }
+      .date {
+        font-size: 0.9rem;
+        color: var(--accent);
+        font-weight: 500;
+      }
+      .desc {
+        font-size: 0.92rem;
+        color: var(--muted);
+      }
+      .empty,
+      .error {
+        grid-column: 1 / -1;
+        text-align: center;
+        color: var(--muted);
+        padding: 40px;
+        background: var(--card);
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+      }
+      footer {
+        max-width: 960px;
+        margin: 50px auto 0;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>✈️ 旅遊手冊</h1>
+      <p class="subtitle">選擇一個目的地，展開行程</p>
+    </header>
+    <main id="grid">
+      <div class="empty">載入中…</div>
+    </main>
+    <footer>每段旅程，都值得被好好記錄。</footer>
+
+    <script>
+      fetch("countries.json?v=" + Date.now())
+        .then((r) => {
+          if (!r.ok) throw new Error("無法載入 countries.json");
+          return r.json();
+        })
+        .then((list) => {
+          const grid = document.getElementById("grid");
+          if (!list.length) {
+            grid.innerHTML = '<div class="empty">尚未有行程，敬請期待。</div>';
+            return;
+          }
+          grid.innerHTML = list
+            .map(
+              (c) => `
         <a class="card" href="${encodeURI(c.path)}">
-          <div class="flag">${c.flag || '🌍'}</div>
+          <div class="flag">${c.flag || "🌍"}</div>
           <div class="name">${c.name}</div>
-          ${c.date ? `<div class="date">${c.date}</div>` : ''}
-          ${c.description ? `<div class="desc">${c.description}</div>` : ''}
+          ${c.date ? `<div class="date">${c.date}</div>` : ""}
+          ${c.description ? `<div class="desc">${c.description}</div>` : ""}
         </a>
-      `).join('');
-    })
-    .catch(err => {
-      document.getElementById('grid').innerHTML =
-        `<div class="error">載入失敗：${err.message}</div>`;
-    });
-</script>
-</body>
+      `,
+            )
+            .join("");
+        })
+        .catch((err) => {
+          document.getElementById("grid").innerHTML =
+            `<div class="error">載入失敗：${err.message}</div>`;
+        });
+    </script>
+  </body>
 </html>
