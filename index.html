@@ -2,1030 +2,118 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0f3530">
-<title>馬來西亞家族旅遊手冊</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jerry 的旅遊手冊</title>
 <style>
-  /* ========== 設計 Token ========== */
   :root {
-    --bg: #fdf6ec;
-    --bg-soft: #f7ecd8;
-    --ink: #1a2826;
-    --ink-soft: #4a5654;
-    --accent: #c9622a;       /* 木瓜橙 */
-    --accent-soft: #f3d5b5;
-    --jungle: #0f3530;       /* 雨林深綠 */
-    --jungle-mid: #2d5a4f;
-    --gold: #d4a04a;
-    --line: #d8c9a8;
-    --shadow: 0 2px 0 rgba(15,53,48,0.08);
+    --bg: #f5f1ea;
+    --card: #ffffff;
+    --ink: #2c2a26;
+    --muted: #7a736a;
+    --accent: #c97b4a;
+    --shadow: 0 4px 20px rgba(0,0,0,.06);
+    --shadow-hover: 0 10px 30px rgba(0,0,0,.12);
   }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
-  html { scroll-behavior: smooth; scroll-padding-top: 60px; }
-
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: "Noto Serif TC", "Songti TC", "PingFang TC", "Heiti TC", serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", sans-serif;
     background: var(--bg);
     color: var(--ink);
-    line-height: 1.7;
-    font-size: 16px;
-    padding: 0;
-    /* 紙質紋理 */
-    background-image:
-      radial-gradient(circle at 20% 10%, rgba(201,98,42,0.04) 0%, transparent 40%),
-      radial-gradient(circle at 80% 80%, rgba(15,53,48,0.04) 0%, transparent 40%);
     min-height: 100vh;
-  }
-
-  /* ========== 頂部 Hero ========== */
-  .hero {
-    background: linear-gradient(135deg, var(--jungle) 0%, var(--jungle-mid) 100%);
-    color: var(--bg);
-    padding: 32px 20px 28px;
-    position: relative;
-    overflow: hidden;
-    border-bottom: 4px solid var(--gold);
-  }
-
-  .hero::before {
-    content: "";
-    position: absolute;
-    top: -40px; right: -40px;
-    width: 180px; height: 180px;
-    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-    opacity: 0.25;
-    border-radius: 50%;
-  }
-
-  .hero-tag {
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    font-family: "Helvetica Neue", sans-serif;
-    font-weight: 600;
-  }
-
-  .hero h1 {
-    font-size: 30px;
-    line-height: 1.25;
-    font-weight: 700;
-    margin-bottom: 12px;
-    letter-spacing: 0.02em;
-  }
-
-  .hero h1 .accent {
-    color: var(--gold);
-    display: inline-block;
-  }
-
-  .hero-meta {
-    font-size: 14px;
-    color: rgba(253,246,236,0.85);
-    border-top: 1px solid rgba(212,160,74,0.3);
-    padding-top: 10px;
-    margin-top: 14px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-
-  .hero-meta span {
-    font-family: "Helvetica Neue", sans-serif;
-    font-size: 12px;
-    letter-spacing: 0.05em;
-  }
-
-  /* ========== 黏性導覽（日期跳轉） ========== */
-  .nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: var(--bg);
-    border-bottom: 1px solid var(--line);
-    padding: 10px 16px;
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    box-shadow: 0 2px 12px rgba(15,53,48,0.05);
-  }
-  .nav::-webkit-scrollbar { display: none; }
-
-  .nav a {
-    flex: 0 0 auto;
-    padding: 6px 14px;
-    border-radius: 20px;
-    background: var(--bg-soft);
-    color: var(--ink);
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 600;
-    border: 1px solid var(--line);
-    font-family: "Helvetica Neue", sans-serif;
-    letter-spacing: 0.05em;
-    transition: all 0.2s;
-  }
-
-  .nav a:active {
-    background: var(--accent);
-    color: var(--bg);
-    border-color: var(--accent);
-  }
-
-  /* ========== 主體 ========== */
-  main {
-    padding: 0 18px 60px;
-    max-width: 720px;
-    margin: 0 auto;
-  }
-
-  /* ========== 區塊：行程總覽 ========== */
-  .overview {
-    margin: 28px 0;
-  }
-
-  .section-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: "Helvetica Neue", sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--accent);
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
-
-  .section-label::before {
-    content: "";
-    width: 24px; height: 1px;
-    background: var(--accent);
-  }
-
-  .section-title {
-    font-size: 22px;
-    color: var(--jungle);
-    margin-bottom: 18px;
-    line-height: 1.3;
-    font-weight: 700;
-  }
-
-  .overview-grid {
-    display: grid;
-    gap: 10px;
-  }
-
-  .overview-row {
-    background: var(--bg-soft);
-    border-radius: 10px;
-    padding: 14px 16px;
-    border-left: 4px solid var(--accent);
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 14px;
-    align-items: center;
-    text-decoration: none;
-    color: var(--ink);
-    box-shadow: var(--shadow);
-  }
-
-  .overview-row:active {
-    transform: scale(0.98);
-    background: var(--accent-soft);
-  }
-
-  .ov-day {
-    font-family: "Helvetica Neue", sans-serif;
-    font-weight: 700;
-    color: var(--jungle);
-    text-align: center;
-    line-height: 1.1;
-    min-width: 44px;
-  }
-
-  .ov-day .num {
-    font-size: 22px;
-    display: block;
-  }
-
-  .ov-day .label {
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-    text-transform: uppercase;
-  }
-
-  .ov-content .ov-route {
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--jungle);
-    margin-bottom: 2px;
-  }
-
-  .ov-content .ov-highlight {
-    font-size: 13px;
-    color: var(--ink-soft);
-    line-height: 1.5;
-  }
-
-  /* ========== 每日行程卡 ========== */
-  .day {
-    margin: 36px 0;
-    background: #fff;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 2px 16px rgba(15,53,48,0.07);
-    border: 1px solid var(--line);
-  }
-
-  .day-header {
-    background: linear-gradient(120deg, var(--jungle) 0%, var(--jungle-mid) 100%);
-    color: var(--bg);
-    padding: 18px 20px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .day-header::after {
-    content: attr(data-num);
-    position: absolute;
-    right: -20px;
-    bottom: -50px;
-    font-size: 140px;
-    font-weight: 900;
-    font-family: "Helvetica Neue", sans-serif;
-    color: rgba(212,160,74,0.12);
-    line-height: 1;
-    letter-spacing: -0.05em;
-  }
-
-  .day-header .day-tag {
-    font-family: "Helvetica Neue", sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    color: var(--gold);
-    margin-bottom: 4px;
-  }
-
-  .day-header h2 {
-    font-size: 22px;
-    font-weight: 700;
-    line-height: 1.3;
-    margin-bottom: 6px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .day-header .date {
-    font-family: "Helvetica Neue", sans-serif;
-    font-size: 13px;
-    color: rgba(253,246,236,0.75);
-    position: relative;
-    z-index: 1;
-  }
-
-  .day-body {
-    padding: 20px;
-  }
-
-  /* 路線標記 */
-  .route {
-    background: var(--bg-soft);
-    border-radius: 8px;
-    padding: 10px 14px;
-    margin-bottom: 18px;
-    font-weight: 600;
-    color: var(--jungle);
-    font-size: 14px;
-    border-left: 3px solid var(--gold);
-  }
-
-  /* 子標題 */
-  .sub {
-    font-size: 13px;
-    color: var(--accent);
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-family: "Helvetica Neue", sans-serif;
-    margin: 18px 0 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .sub::before {
-    content: "◆";
-    color: var(--accent);
-    font-size: 10px;
-  }
-
-  /* 景點清單 */
-  .spots {
-    list-style: none;
-    padding: 0;
-  }
-
-  .spots li {
-    padding: 8px 0 8px 24px;
-    position: relative;
-    border-bottom: 1px dashed var(--line);
-    font-size: 15px;
-    color: var(--ink);
-  }
-
-  .spots li:last-child { border-bottom: none; }
-
-  .spots li::before {
-    content: "";
-    position: absolute;
-    left: 6px; top: 16px;
-    width: 6px; height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-  }
-
-  .spots li.indent {
-    padding-left: 40px;
-    font-size: 14px;
-    color: var(--ink-soft);
-  }
-
-  .spots li.indent::before {
-    left: 22px;
-    width: 4px; height: 4px;
-    background: var(--ink-soft);
-  }
-
-  .spots li .note {
-    color: var(--ink-soft);
-    font-size: 12px;
-    font-family: "Helvetica Neue", sans-serif;
-  }
-
-  .spots li.special {
-    background: linear-gradient(90deg, rgba(212,160,74,0.15), transparent);
-    border-radius: 6px;
-    padding-left: 28px;
-  }
-
-  .spots li.special::before {
-    content: "★";
-    background: transparent;
-    color: var(--gold);
-    width: auto; height: auto;
-    font-size: 14px;
-    top: 9px; left: 8px;
-    border-radius: 0;
-  }
-
-  /* 餐食表 */
-  .meals {
-    margin-top: 8px;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-
-  .meal-row {
-    display: grid;
-    grid-template-columns: 60px 1fr;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .meal-row:last-child { border-bottom: none; }
-
-  .meal-label {
-    background: var(--bg-soft);
-    padding: 10px 12px;
-    font-weight: 700;
-    color: var(--jungle);
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-right: 1px solid var(--line);
-  }
-
-  .meal-content {
-    padding: 10px 14px;
-    font-size: 14px;
-    color: var(--ink);
-    display: flex;
-    align-items: center;
-  }
-
-  .meal-content.self {
-    color: var(--ink-soft);
-    font-style: italic;
-  }
-
-  .price-tag {
-    display: inline-block;
-    background: var(--accent);
-    color: var(--bg);
-    font-family: "Helvetica Neue", sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 1px 7px;
-    border-radius: 10px;
-    margin-left: 6px;
-    letter-spacing: 0.05em;
-    vertical-align: middle;
-  }
-
-  /* 飯店資訊 */
-  .hotel {
-    background: var(--jungle);
-    color: var(--bg);
-    border-radius: 10px;
-    padding: 14px 16px;
-    margin-top: 16px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .hotel-icon {
-    font-size: 24px;
-    flex-shrink: 0;
-  }
-
-  .hotel-info { flex: 1; }
-
-  .hotel-label {
-    font-family: "Helvetica Neue", sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: var(--gold);
-    margin-bottom: 2px;
-  }
-
-  .hotel-name {
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 1.3;
-  }
-
-  /* 提醒框 */
-  .tip {
-    background: linear-gradient(90deg, var(--accent-soft), transparent);
-    border-left: 4px solid var(--accent);
-    border-radius: 0 8px 8px 0;
-    padding: 12px 14px;
-    margin: 14px 0;
-    font-size: 13px;
-    color: var(--ink);
+    padding: 40px 20px 60px;
     line-height: 1.6;
   }
-
-  .tip strong {
-    color: var(--accent);
-    font-weight: 700;
-  }
-
-  /* ========== 速查表 ========== */
-  .quickref {
-    margin: 36px 0;
-    background: #fff;
-    border-radius: 14px;
-    padding: 20px;
-    border: 1px solid var(--line);
-    box-shadow: 0 2px 16px rgba(15,53,48,0.07);
-  }
-
-  .quickref h3 {
-    font-size: 18px;
-    color: var(--jungle);
-    margin-bottom: 14px;
-    font-weight: 700;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-  }
-
-  th, td {
-    padding: 10px 8px;
-    text-align: left;
-    border-bottom: 1px solid var(--line);
-    vertical-align: top;
-  }
-
-  th {
-    background: var(--bg-soft);
-    font-weight: 700;
-    color: var(--jungle);
-    font-family: "Helvetica Neue", sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  td.day-cell {
-    font-family: "Helvetica Neue", sans-serif;
-    font-weight: 700;
-    color: var(--accent);
-    white-space: nowrap;
-  }
-
-  td .price {
-    font-family: "Helvetica Neue", sans-serif;
-    font-weight: 700;
-    color: var(--accent);
-  }
-
-  /* ========== 自理餐次列表 ========== */
-  .self-list {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    gap: 8px;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .self-list li {
-    background: var(--bg-soft);
-    padding: 10px 12px;
-    border-radius: 8px;
-    font-size: 13px;
-    border-left: 3px solid var(--gold);
-    color: var(--ink);
-  }
-
-  .self-list li strong {
-    display: block;
-    font-family: "Helvetica Neue", sans-serif;
-    color: var(--accent);
-    font-size: 12px;
-    margin-bottom: 2px;
-    letter-spacing: 0.05em;
-  }
-
-  /* ========== 頁尾 ========== */
-  footer {
+  header {
+    max-width: 960px;
+    margin: 0 auto 40px;
     text-align: center;
-    padding: 28px 20px 40px;
-    color: var(--ink-soft);
-    font-size: 12px;
-    font-family: "Helvetica Neue", sans-serif;
-    letter-spacing: 0.1em;
-    border-top: 1px solid var(--line);
-    margin-top: 40px;
   }
-
-  footer .ornament {
-    color: var(--accent);
+  h1 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    letter-spacing: 2px;
     margin-bottom: 8px;
-    font-size: 14px;
   }
-
-  /* 回到頂部按鈕 */
-  .top-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 44px;
-    height: 44px;
-    background: var(--jungle);
-    color: var(--bg);
-    border-radius: 50%;
-    text-align: center;
-    line-height: 44px;
+  .subtitle { color: var(--muted); font-size: 1rem; }
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 28px 24px;
+    box-shadow: var(--shadow);
     text-decoration: none;
-    font-size: 18px;
-    box-shadow: 0 4px 16px rgba(15,53,48,0.3);
-    z-index: 99;
-    border: 2px solid var(--gold);
+    color: inherit;
+    transition: transform .2s ease, box-shadow .2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
-
-  /* ========== 平板以上 ========== */
-  @media (min-width: 600px) {
-    .hero h1 { font-size: 36px; }
-    main { padding: 0 24px 60px; }
-    .self-list { grid-template-columns: repeat(3, 1fr); }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+  }
+  .flag { font-size: 2.6rem; line-height: 1; }
+  .name { font-size: 1.3rem; font-weight: 600; }
+  .date { font-size: .9rem; color: var(--accent); font-weight: 500; }
+  .desc { font-size: .92rem; color: var(--muted); }
+  .empty, .error {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--muted);
+    padding: 40px;
+    background: var(--card);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+  }
+  footer {
+    max-width: 960px;
+    margin: 50px auto 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: .85rem;
   }
 </style>
 </head>
 <body>
+  <header>
+    <h1>✈️ Jerry 的旅遊手冊</h1>
+    <p class="subtitle">選擇一個目的地，展開行程</p>
+  </header>
+  <main id="grid">
+    <div class="empty">載入中…</div>
+  </main>
+  <footer>每段旅程，都值得被好好記錄。</footer>
 
-<!-- ========== Hero ========== -->
-<header class="hero">
-  <div class="hero-tag">FAMILY TRIP · MALAYSIA 2026</div>
-  <h1>馬來西亞<br><span class="accent">家族旅遊手冊</span></h1>
-  <div class="hero-meta">
-    <span>5/18 — 5/23</span>
-    <span>6 DAYS · 2 COUNTRIES</span>
-  </div>
-</header>
-
-<!-- ========== 黏性導覽 ========== -->
-<nav class="nav" id="top">
-  <a href="#overview">總覽</a>
-  <a href="#day1">D1 新加坡</a>
-  <a href="#day2">D2 馬六甲</a>
-  <a href="#day3">D3 波德申</a>
-  <a href="#day4">D4 吉隆坡</a>
-  <a href="#day5">D5 雲頂</a>
-  <a href="#day6">D6 布城</a>
-  <a href="#hotels">住宿</a>
-  <a href="#meals">餐食</a>
-</nav>
-
-<main>
-
-  <!-- ========== 行程總覽 ========== -->
-  <section class="overview" id="overview">
-    <div class="section-label">Itinerary</div>
-    <h2 class="section-title">六日行程總覽</h2>
-    <div class="overview-grid">
-
-      <a class="overview-row" href="#day1">
-        <div class="ov-day"><span class="num">01</span><span class="label">5/18</span></div>
-        <div class="ov-content">
-          <div class="ov-route">台北 → 新加坡 → 新山</div>
-          <div class="ov-highlight">牛車水 · 魚尾獅公園 · 濱海灣花園</div>
-        </div>
-      </a>
-
-      <a class="overview-row" href="#day2">
-        <div class="ov-day"><span class="num">02</span><span class="label">5/19</span></div>
-        <div class="ov-content">
-          <div class="ov-route">新山 → 馬六甲</div>
-          <div class="ov-highlight">Premium Outlet · 海峽清真寺 · 馬來婚禮體驗</div>
-        </div>
-      </a>
-
-      <a class="overview-row" href="#day3">
-        <div class="ov-day"><span class="num">03</span><span class="label">5/20</span></div>
-        <div class="ov-content">
-          <div class="ov-route">馬六甲 → 波德申</div>
-          <div class="ov-highlight">雞場街 · 荷蘭紅屋 · 大紅花海上渡假村</div>
-        </div>
-      </a>
-
-      <a class="overview-row" href="#day4">
-        <div class="ov-day"><span class="num">04</span><span class="label">5/21</span></div>
-        <div class="ov-content">
-          <div class="ov-route">波德申 → 吉隆坡</div>
-          <div class="ov-highlight">國家皇宮 · 獨立廣場 · TRX 空中花園</div>
-        </div>
-      </a>
-
-      <a class="overview-row" href="#day5">
-        <div class="ov-day"><span class="num">05</span><span class="label">5/22</span></div>
-        <div class="ov-content">
-          <div class="ov-route">吉隆坡 → 雲頂 → 吉隆坡</div>
-          <div class="ov-highlight">雲頂纜車 · 雪世界 · 亞羅夜市</div>
-        </div>
-      </a>
-
-      <a class="overview-row" href="#day6">
-        <div class="ov-day"><span class="num">06</span><span class="label">5/23</span></div>
-        <div class="ov-content">
-          <div class="ov-route">吉隆坡 → 台北</div>
-          <div class="ov-highlight">布城清真寺 · 首相府廣場 · 回程</div>
-        </div>
-      </a>
-
-    </div>
-  </section>
-
-  <!-- ========== Day 1 ========== -->
-  <article class="day" id="day1">
-    <header class="day-header" data-num="01">
-      <div class="day-tag">DAY ONE</div>
-      <h2>啟程・獅城風光</h2>
-      <div class="date">2026 / 05 / 18 · 星期一</div>
-    </header>
-    <div class="day-body">
-      <div class="route">✈️ 台北 → 新加坡 → 新山</div>
-
-      <div class="sub">行程內容</div>
-      <ul class="spots">
-        <li>牛車水（Chinatown）</li>
-        <li>One Fullerton 魚尾獅公園</li>
-        <li>濱海藝術中心</li>
-        <li>濱海灣花園 — 超級天空樹</li>
-        <li>濱海灣金沙綜合娛樂城
-          <ul class="spots" style="margin-top:6px;">
-            <li class="indent">螺旋橋</li>
-            <li class="indent">賭場</li>
-            <li class="indent">頂級購物廣場</li>
-            <li class="indent">時尚美食中心</li>
-          </ul>
-        </li>
-        <li>跨境前往新山</li>
-      </ul>
-
-      <div class="sub">三餐</div>
-      <div class="meals">
-        <div class="meal-row"><div class="meal-label">早</div><div class="meal-content">溫暖的家</div></div>
-        <div class="meal-row"><div class="meal-label">午</div><div class="meal-content">機上精緻套餐</div></div>
-        <div class="meal-row"><div class="meal-label">晚</div><div class="meal-content self">方便遊玩，敬請自理</div></div>
-      </div>
-
-      <div class="hotel">
-        <div class="hotel-icon">🏨</div>
-        <div class="hotel-info">
-          <div class="hotel-label">TONIGHT'S STAY</div>
-          <div class="hotel-name">IBIS STYLES JOHOR ISKANDAR PUTERI</div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- ========== Day 2 ========== -->
-  <article class="day" id="day2">
-    <header class="day-header" data-num="02">
-      <div class="day-tag">DAY TWO</div>
-      <h2>跨州・馬來婚禮</h2>
-      <div class="date">2026 / 05 / 19 · 星期二</div>
-    </header>
-    <div class="day-body">
-      <div class="route">🚌 新山 → 馬六甲（約 220 公里）</div>
-
-      <div class="sub">行程內容</div>
-      <ul class="spots">
-        <li>Premium Outlet</li>
-        <li>馬六甲海峽清真寺</li>
-        <li>摩敦之橋 <span class="note">（車經）</span></li>
-        <li>聖淘沙百年老宅 <span class="note">（車經）</span></li>
-        <li>愛國者之屋 <span class="note">（車經）</span></li>
-        <li class="special">馬來婚禮主題拍照體驗</li>
-        <li class="special">ROTI JALA DIY 體驗</li>
-      </ul>
-
-      <div class="sub">三餐</div>
-      <div class="meals">
-        <div class="meal-row"><div class="meal-label">早</div><div class="meal-content">酒店內</div></div>
-        <div class="meal-row"><div class="meal-label">午</div><div class="meal-content self">OUTLET 自理</div></div>
-        <div class="meal-row"><div class="meal-label">晚</div><div class="meal-content">馬來婚禮主題風味餐<span class="price-tag">RM40</span></div></div>
-      </div>
-
-      <div class="hotel">
-        <div class="hotel-icon">🏨</div>
-        <div class="hotel-info">
-          <div class="hotel-label">TONIGHT'S STAY</div>
-          <div class="hotel-name">BABA HOUSE MELAKA</div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- ========== Day 3 ========== -->
-  <article class="day" id="day3">
-    <header class="day-header" data-num="03">
-      <div class="day-tag">DAY THREE</div>
-      <h2>古城・文化遺產</h2>
-      <div class="date">2026 / 05 / 20 · 星期三</div>
-    </header>
-    <div class="day-body">
-      <div class="route">🚌 馬六甲 → 波德申</div>
-
-      <div class="sub">馬六甲文化遺產之旅</div>
-      <ul class="spots">
-        <li>古董雞場街</li>
-        <li>荷蘭紅屋</li>
-        <li>大鐘樓</li>
-        <li>基督堂</li>
-        <li>古城堡</li>
-        <li>聖保羅教堂</li>
-        <li>三寶井</li>
-        <li>三寶廟</li>
-        <li class="special">三輪車遊文化古蹟</li>
-      </ul>
-
-      <div class="sub">續往</div>
-      <ul class="spots">
-        <li>大紅花海上渡假村</li>
-      </ul>
-
-      <div class="sub">三餐</div>
-      <div class="meals">
-        <div class="meal-row"><div class="meal-label">早</div><div class="meal-content">酒店內</div></div>
-        <div class="meal-row"><div class="meal-label">午</div><div class="meal-content">迷你麵包雞風味餐 + 每桌二瓶飲料<span class="price-tag">RM40</span></div></div>
-        <div class="meal-row"><div class="meal-label">晚</div><div class="meal-content self">方便遊玩，敬請自理</div></div>
-      </div>
-
-      <div class="hotel">
-        <div class="hotel-icon">🌺</div>
-        <div class="hotel-info">
-          <div class="hotel-label">TONIGHT'S STAY</div>
-          <div class="hotel-name">LEXIS HIBISCUS PORT DICKSON<br><span style="font-weight:400;font-size:12px;color:var(--gold);">大紅花海上渡假村</span></div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- ========== Day 4 ========== -->
-  <article class="day" id="day4">
-    <header class="day-header" data-num="04">
-      <div class="day-tag">DAY FOUR</div>
-      <h2>首都・吉隆坡風華</h2>
-      <div class="date">2026 / 05 / 21 · 星期四</div>
-    </header>
-    <div class="day-body">
-      <div class="route">🚌 波德申 → 吉隆坡</div>
-
-      <div class="sub">行程內容</div>
-      <ul class="spots">
-        <li>大紅花海上渡假村 <span class="note">（停留 60-90 分鐘）</span></li>
-        <li>乳膠（土產店）</li>
-      </ul>
-
-      <div class="sub">吉隆坡市區觀光</div>
-      <ul class="spots">
-        <li>國家皇宮</li>
-        <li>獨立廣場</li>
-        <li>高等法院</li>
-        <li>英式火車站</li>
-        <li>馬哈迪紀念館 <span class="note">（停留 90-120 分鐘）</span></li>
-      </ul>
-
-      <div class="tip">
-        <strong>備註：</strong>馬哈迪紀念館如遇休館，將改為國家美術館。
-      </div>
-
-      <div class="sub">下午與傍晚</div>
-      <ul class="spots">
-        <li class="special">茶葉文化館：品普洱老茶 + 享用娘惹糕點</li>
-        <li>老城區
-          <ul class="spots" style="margin-top:6px;">
-            <li class="indent">鬼仔巷</li>
-            <li class="indent">中央藝術坊</li>
-          </ul>
-        </li>
-        <li>TRX 購物商場 + 全球最大空中花園</li>
-      </ul>
-
-      <div class="sub">三餐</div>
-      <div class="meals">
-        <div class="meal-row"><div class="meal-label">早</div><div class="meal-content">酒店內</div></div>
-        <div class="meal-row"><div class="meal-label">午</div><div class="meal-content">肉骨茶風味餐<span class="price-tag">RM35</span></div></div>
-        <div class="meal-row"><div class="meal-label">晚</div><div class="meal-content self">方便遊玩，敬請自理</div></div>
-      </div>
-
-      <div class="hotel">
-        <div class="hotel-icon">🏙️</div>
-        <div class="hotel-info">
-          <div class="hotel-label">TONIGHT'S STAY</div>
-          <div class="hotel-name">IBIS KUALA LUMPUR CITY CENTRE HOTEL</div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- ========== Day 5 ========== -->
-  <article class="day" id="day5">
-    <header class="day-header" data-num="05">
-      <div class="day-tag">DAY FIVE</div>
-      <h2>雲頂・冰雪奇境</h2>
-      <div class="date">2026 / 05 / 22 · 星期五</div>
-    </header>
-    <div class="day-body">
-      <div class="route">🚠 吉隆坡 → 雲頂 → 吉隆坡</div>
-
-      <div class="sub">行程內容</div>
-      <ul class="spots">
-        <li>飯店出發 <span class="note">（停留 40-60 分鐘）</span></li>
-        <li>土產店</li>
-        <li>雲頂纜車</li>
-        <li>雲頂娛樂城</li>
-        <li class="special">特別贈送：雲頂雪世界門票
-          <ul class="spots" style="margin-top:6px;">
-            <li class="indent">冰雪城堡</li>
-            <li class="indent">雪地滑道</li>
-            <li class="indent">冰屋</li>
-          </ul>
-        </li>
-        <li>雙子星花園廣場</li>
-      </ul>
-
-      <div class="tip">
-        <strong>提醒：</strong>雲頂山上氣溫較低（常 16-22°C），雪世界內僅 -5°C 左右。建議準備薄外套或帽子。
-      </div>
-
-      <div class="sub">三餐</div>
-      <div class="meals">
-        <div class="meal-row"><div class="meal-label">早</div><div class="meal-content">酒店內</div></div>
-        <div class="meal-row"><div class="meal-label">午</div><div class="meal-content self">方便遊玩，敬請自理</div></div>
-        <div class="meal-row"><div class="meal-label">晚</div><div class="meal-content">亞羅夜市風味餐<span class="price-tag">RM35</span></div></div>
-      </div>
-
-      <div class="tip">
-        <strong>備註：</strong>亞羅夜市如遇公休，將改發餐費。
-      </div>
-
-      <div class="hotel">
-        <div class="hotel-icon">🏙️</div>
-        <div class="hotel-info">
-          <div class="hotel-label">TONIGHT'S STAY</div>
-          <div class="hotel-name">IBIS KUALA LUMPUR CITY CENTRE HOTEL</div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- ========== Day 6 ========== -->
-  <article class="day" id="day6">
-    <header class="day-header" data-num="06">
-      <div class="day-tag">DAY SIX</div>
-      <h2>布城・粉紅清真寺</h2>
-      <div class="date">2026 / 05 / 23 · 星期六</div>
-    </header>
-    <div class="day-body">
-      <div class="route">✈️ 吉隆坡 → 台北</div>
-
-      <div class="sub">布城觀光</div>
-      <ul class="spots">
-        <li>清真寺（粉紅清真寺）</li>
-        <li>布城湖</li>
-        <li>首相署</li>
-        <li>首相府廣場</li>
-      </ul>
-
-      <div class="sub">續行</div>
-      <ul class="spots">
-        <li>返回吉隆坡</li>
-        <li>搭機回台北</li>
-      </ul>
-
-      <div class="tip">
-        <strong>航班加碼：</strong>若回程搭乘 BR228 或 JX726 航班，加走三井 Outlet。
-      </div>
-
-      <div class="sub">餐食</div>
-      <div class="meals">
-        <div class="meal-row"><div class="meal-label">早</div><div class="meal-content">酒店內</div></div>
-        <div class="meal-row"><div class="meal-label">午</div><div class="meal-content self">方便遊玩，敬請自理 / 機上精緻套餐</div></div>
-      </div>
-    </div>
-  </article>
-
-  <!-- ========== 住宿總覽 ========== -->
-  <section class="quickref" id="hotels">
-    <div class="section-label">Lodging</div>
-    <h3>🏨 住宿總覽</h3>
-    <table>
-      <thead>
-        <tr><th>日期</th><th>飯店</th><th>城市</th></tr>
-      </thead>
-      <tbody>
-        <tr><td class="day-cell">5/18</td><td>IBIS STYLES JOHOR ISKANDAR PUTERI</td><td>新山</td></tr>
-        <tr><td class="day-cell">5/19</td><td>BABA HOUSE MELAKA</td><td>馬六甲</td></tr>
-        <tr><td class="day-cell">5/20</td><td>LEXIS HIBISCUS PORT DICKSON</td><td>波德申</td></tr>
-        <tr><td class="day-cell">5/21</td><td>IBIS KUALA LUMPUR CITY CENTRE</td><td>吉隆坡</td></tr>
-        <tr><td class="day-cell">5/22</td><td>IBIS KUALA LUMPUR CITY CENTRE</td><td>吉隆坡</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- ========== 餐食速查 ========== -->
-  <section class="quickref" id="meals">
-    <div class="section-label">Dining</div>
-    <h3>🍴 風味餐速查</h3>
-    <table>
-      <thead>
-        <tr><th>日期</th><th>風味餐</th><th>費用</th></tr>
-      </thead>
-      <tbody>
-        <tr><td class="day-cell">D2</td><td>馬來婚禮主題</td><td><span class="price">RM40</span></td></tr>
-        <tr><td class="day-cell">D3</td><td>迷你麵包雞</td><td><span class="price">RM40</span></td></tr>
-        <tr><td class="day-cell">D4</td><td>肉骨茶</td><td><span class="price">RM35</span></td></tr>
-        <tr><td class="day-cell">D5</td><td>亞羅夜市</td><td><span class="price">RM35</span></td></tr>
-      </tbody>
-    </table>
-
-    <h3 style="margin-top:24px;">🥢 自理餐次</h3>
-    <ul class="self-list">
-      <li><strong>D1</strong>晚餐</li>
-      <li><strong>D2</strong>午餐 (Outlet)</li>
-      <li><strong>D3</strong>晚餐</li>
-      <li><strong>D4</strong>晚餐</li>
-      <li><strong>D5</strong>午餐</li>
-      <li><strong>D6</strong>午餐 / 機上</li>
-    </ul>
-  </section>
-
-</main>
-
-<a href="#top" class="top-btn" aria-label="回到頂部">↑</a>
-
-<footer>
-  <div class="ornament">✦ ✦ ✦</div>
-  <div>SELAMAT JALAN · 旅途愉快</div>
-  <div style="margin-top:6px;opacity:0.7;">家族馬來西亞旅遊手冊 · 離線版</div>
-</footer>
-
+<script>
+  fetch('countries.json?v=' + Date.now())
+    .then(r => {
+      if (!r.ok) throw new Error('無法載入 countries.json');
+      return r.json();
+    })
+    .then(list => {
+      const grid = document.getElementById('grid');
+      if (!list.length) {
+        grid.innerHTML = '<div class="empty">尚未有行程，敬請期待。</div>';
+        return;
+      }
+      grid.innerHTML = list.map(c => `
+        <a class="card" href="${encodeURI(c.path)}">
+          <div class="flag">${c.flag || '🌍'}</div>
+          <div class="name">${c.name}</div>
+          ${c.date ? `<div class="date">${c.date}</div>` : ''}
+          ${c.description ? `<div class="desc">${c.description}</div>` : ''}
+        </a>
+      `).join('');
+    })
+    .catch(err => {
+      document.getElementById('grid').innerHTML =
+        `<div class="error">載入失敗：${err.message}</div>`;
+    });
+</script>
 </body>
 </html>
